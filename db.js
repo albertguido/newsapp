@@ -1,7 +1,6 @@
 var database = require('mongodb').Db;
 var connection = require('mongodb').Connection;
 var server = require('mongodb').Server;
-var bson = require('mongodb').Bson;
 var objectId = require('mongodb').ObjectId;
 
 dbProvider = function(host, port){
