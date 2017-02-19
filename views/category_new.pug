@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1= title
+	div
+		form(method="post")
+			div
+				div
+					span.label Category Name :
+					input(type="text", name="categoryName")
+					input(type="submit", value="Add")

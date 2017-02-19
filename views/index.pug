@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h1= title
+	div
+		each news in allNews
+			div
+				a(href="/news/" + news._id.toHexString()) #{news.title}
+	br
+	br
+	div
+		a(href="/news/new")!= "Add News"
+		br
+		a(href="/category")!= "Categories"

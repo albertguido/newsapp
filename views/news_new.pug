@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1= title
+    div
+        form( method="post")
+            div
+                div
+                    span.label Category :
+                    select(name="categoryId")
+                        each category in categories
+                            option(value=category.id) #{category.name}
+                div
+                    span.label Title :
+                    input(type="text", name="newsTitle")
+                div
+                    span.label Description :
+                    textarea(name="newsDesc")
+                div
+                    input(type="submit", value="Post News")
+        a(href="/")!= "Back to News"
