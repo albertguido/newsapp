@@ -2,9 +2,10 @@ extends layout
 
 block content
 	h1= title
-	p categories
 	div
 		each category in categories
 			div
-				name= category.name
+				a(href="/category/"+ category._id.toHexString()) #{category.name}
+		br
+		br
 		a(href="/category/new")!= "Add New Category"

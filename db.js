@@ -75,7 +75,19 @@ dbProvider.prototype.getNewsById = function(id, callback){
 	this.getNews(function(error, news_collection){
 		if(error) callback(error);
 		else{
-			news_collection.findOne({_id: news_collection.data.bson_serializer.objectId.createFromHexString(id)}, function(error, res){
+			news_collection.findOne({_id: new objectId(id)}, function(error, res){
+				if(error) callback(error);
+				else callback(null, res);
+			});
+		};
+	});
+};
+
+dbProvider.prototype.getNewsByCategoryId = function(categoryId, callback){
+	this.getNews(function(error, news_collection){
+		if(error) callback(error);
+		else{
+			news_collection.find({category_id: new objectId(categoryId)}, function(error, res){
 				if(error) callback(error);
 				else callback(null, res);
 			});
@@ -91,8 +103,20 @@ dbProvider.prototype.getComments = function(callback){
 	});
 };
 
+dbProvider.prototype.getCommentsByNewsId = function(news_id, callback){
+	this.getComments(function(error, comments_collection){
+		if(error) callback(error);
+		else{
+			comments_collection.find({news_id: new objectId(news_id)}, function(error, res){
+				if(error) callback(error);
+				else callback(null, res);
+			});
+		};
+	});
+};
+
 dbProvider.prototype.addComment = function(comment, callback){
-	this.getNews(function(error, comments_collection){
+	this.getComments(function(error, comments_collection){
 		if(error) callback(error);
 		else{
 			comments_collection.insert(comment, function(){

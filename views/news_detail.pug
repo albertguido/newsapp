@@ -2,6 +2,14 @@ extends layout
 
 block content
 	div
-		Title = #{news.title}
+		h1= news.title
 		br
-		Description = #{news.description}
+		p= news.description
+
+	div
+		
+	div
+		form(method="POST")
+			span.label Insert Your Comment :
+			textarea(name="content")
+			input(type="submit", value="Add Comment")

@@ -29,14 +29,28 @@ router.post('/news/new', function(req, res){
 		title: req.param('newsTitle'),
 		description: req.param('newsDesc')
 	}, function(error, docs){
-		res.redirect('/category');
+		res.redirect('/');
 	});
 });
 
 router.get('/news/:id', function(req, res){
 	db.getNewsById(req.params.id, function(error, news){
-		res.render('news_detail', { news: news });
+		db.getCommentsByNewsId(req.params.id, function(error, comments){
+			res.render('news_detail', { 
+				news: news, 
+				comments: comments 
+			});
+		});
 	});
+});
+
+router.post('/news/:id', function(req, res){
+	db.addComment({
+		news_id: req.params.id,
+		content: req.param('content')
+	}, function(error, docs){
+		res.redirect('/news/'+req.params.id);
+	})
 });
 
 module.exports = router;

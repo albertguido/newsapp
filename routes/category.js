@@ -8,7 +8,7 @@ var db = new dbProvider('localhost', 27017);
 router.get('/', function(req, res, next) {
 	db.getAllCategories(function(error, cat){
 		res.render('category', { 
-			title: 'Category',
+			title: 'Categories',
 			categories: cat
 		});
 	});
@@ -22,8 +22,15 @@ router.post('/new', function(req, res){
 	db.addCategory({
 		name: req.param('categoryName')
 	}, function(error, docs){
-		res.redirect('/category');
+		res.redirect('/');
 	});
 });
 
+router.get('/:id', function(req, res){
+	db.getNewsByCategoryId(req.params.id, function(error, news){
+		res.render('news_by_category', { news: news });
+	});
+});
+
+// export
 module.exports = router;
