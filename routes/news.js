@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var dbProvider = require('../db').dbProvider;
-
+var objectId = require('mongodb').ObjectId;
 var db = new dbProvider('localhost', 27017);
 
 
@@ -46,7 +46,7 @@ router.get('/news/:id', function(req, res){
 
 router.post('/news/:id', function(req, res){
 	db.addComment({
-		news_id: req.params.id,
+		news_id: new objectId(req.params.id),
 		content: req.param('content')
 	}, function(error, docs){
 		res.redirect('/news/'+req.params.id);

@@ -3,11 +3,5 @@ extends layout
 block content
 	div
 		each n in news
-			div
-				n
-	br
-	br
-	div
-		a(href="/news/new")!= "Add News"
-		br
-		a(href="/category")!= "Categories"
+			#{n.title}
+	
